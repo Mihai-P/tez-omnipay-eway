@@ -2,13 +2,13 @@
 
 namespace Omnipay\Eway31\Message;
 
-use Omnipay\Common\Message\AbstractResponse;
-use Omnipay\Common\Message\RedirectResponseInterface;
+use \Omnipay\Common\Message\AbstractResponse;
+use \Omnipay\Common\Message\RedirectResponseInterface;
 
 /**
  * eWAY Rapid 3.0 Purchase Response
  */
-class RapidResponse extends AbstractResponse implements RedirectResponseInterface
+class RapidResponse extends \Omnipay\Eway\Message\RapidResponse
 {
     public static $MESSAGES = array(
         'A2000' => 'Transaction Approved',
@@ -150,7 +150,7 @@ class RapidResponse extends AbstractResponse implements RedirectResponseInterfac
 
     public function isSuccessful()
     {
-        return isset($this->data['TransactionStatus']) && $this->data['TransactionStatus'];
+        return $this->getCode() == 'A2000';
     }
 
     public function isRedirect()
@@ -177,9 +177,9 @@ class RapidResponse extends AbstractResponse implements RedirectResponseInterfac
         }
     }
 
-    public function getTransactionReference()
+    public function getTokenCustomerID()
     {
-        return isset($this->data['TransactionID']) ? (string) $this->data['TransactionID'] : null;
+        return isset($this->data['Customer']['TokenCustomerID']) ? (string) $this->data['Customer']['TokenCustomerID'] : null;
     }
 
     public function getMessage()

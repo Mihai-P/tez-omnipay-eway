@@ -2,56 +2,40 @@
 
 namespace Omnipay\Eway31;
 
-use Omnipay\Common\AbstractGateway;
-
 /**
  * eWAY Rapid 3.0 Gateway
  */
-class RapidGateway extends AbstractGateway
+class RapidGateway extends \Omnipay\Eway\RapidGateway
 {
-    public $transparentRedirect = true;
-
     public function getName()
     {
         return 'eWAY Rapid 3.1';
     }
 
-    public function getDefaultParameters()
+    /**
+     * @param array $parameters
+     * @return \Omnipay\Stripe\Message\CreateCardRequest
+     */
+    public function createCard(array $parameters = array())
     {
-        return array(
-            'apiKey' => '',
-            'password' => '',
-            'testMode' => false,
-        );
+        return $this->createRequest('\Omnipay\Eway31\Message\CreateCardRequest', $parameters);
     }
 
-    public function getApiKey()
+    /**
+     * @param array $parameters
+     * @return \Omnipay\Stripe\Message\CreateCardRequest
+     */
+    public function updateCard(array $parameters = array())
     {
-        return $this->getParameter('apiKey');
+        return $this->createRequest('\Omnipay\Eway31\Message\UpdateCardRequest', $parameters);
     }
 
-    public function setApiKey($value)
-    {
-        return $this->setParameter('apiKey', $value);
-    }
-
-    public function getPassword()
-    {
-        return $this->getParameter('password');
-    }
-
-    public function setPassword($value)
-    {
-        return $this->setParameter('password', $value);
-    }
-
+    /**
+     * @param array $parameters
+     * @return \Omnipay\Stripe\Message\CreateCardRequest
+     */
     public function purchase(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Eway\Message\RapidPurchaseRequest', $parameters);
-    }
-
-    public function completePurchase(array $parameters = array())
-    {
-        return $this->createRequest('\Omnipay\Eway\Message\RapidCompletePurchaseRequest', $parameters);
+        return $this->createRequest('\Omnipay\Eway31\Message\RapidPurchaseRequest', $parameters);
     }
 }

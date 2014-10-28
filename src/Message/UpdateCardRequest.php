@@ -3,32 +3,33 @@
 namespace Omnipay\Eway31\Message;
 
 /**
- * eWAY Rapid 3.0 Purchase Request
+ * Stripe Update Credit Card Request
  */
-class RapidPurchaseRequest extends AbstractRequest
+class UpdateCardRequest extends AbstractRequest
 {
     public function getData()
     {
         $data = array();
-        $data['Method'] = 'ProcessPayment';
+        $data['Method'] = 'UpdateTokenCustomer';
         $data['DeviceID'] = 'https://github.com/adrianmacneil/omnipay';
-        $data['TotalAmount'] = 0;
         $data['RedirectUrl'] = $this->getReturnUrl();
         $data['TransactionType'] = "Purchase";
         $data['Customer'] = array();
+        $data['Customer']['Title'] = 'Mr.';
         $data['Customer']['TokenCustomerID'] = $this->getToken();
-
-        $data['Payment'] = array();
-        $data['Payment']['TotalAmount'] = $this->getAmountInteger();
-        $data['Payment']['InvoiceNumber'] = $this->getTransactionId();
-        $data['Payment']['InvoiceDescription'] = $this->getDescription();
-        $data['Payment']['CurrencyCode'] = $this->getCurrency();
-
         $card = $this->getCard();
         if ($card) {
             $data['Customer']['FirstName'] = $card->getFirstName();
             $data['Customer']['LastName'] = $card->getLastName();
+            $data['Customer']['TokenCustomerID'] = $this->getToken();
             $data['Customer']['CardDetails'] = [
+                "Name" => $card->getFirstName() . ' ' . $card->getLastName(),
+                "Number" => $card->getNumber(),
+                "ExpiryMonth" => $card->getExpiryMonth(),
+                "ExpiryYear" => $card->getExpiryYear(),
+                "StartMonth" => "",
+                "StartYear" => "",
+                "IssueNumber" => "",
                 "CVN" => $card->getCvv()
             ];
         }
