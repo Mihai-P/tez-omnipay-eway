@@ -1,0 +1,35 @@
+{
+    "name": "tez-omnipay-eway",
+    "type": "library",
+    "description": "eWay driver for the Omnipay payment processing library",
+    "keywords": [
+        "eway",
+        "gateway",
+        "merchant",
+        "omnipay",
+        "pay",
+        "payment"
+    ],
+    "homepage": "https://github.com/thephpleague/omnipay-eway",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mihai Petrescu",
+            "email": "adrian@adrianmacneil.com"
+        },
+    ],
+    "autoload": {
+        "psr-4": { "Omnipay\\Eway31\\" : "src/" }
+    },
+    "require": {
+        "omnipay/common": "~2.0"
+    },
+    "require-dev": {
+        "omnipay/tests": "~2.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
+    }
+}
