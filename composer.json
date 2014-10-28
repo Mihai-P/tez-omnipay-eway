@@ -1,5 +1,5 @@
 {
-    "name": "tez-omnipay-eway",
+    "name": "tez/omnipay-eway",
     "type": "library",
     "description": "eWay driver for the Omnipay payment processing library",
     "keywords": [
