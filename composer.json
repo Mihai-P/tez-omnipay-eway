@@ -10,7 +10,7 @@
         "pay",
         "payment"
     ],
-    "homepage": "https://github.com/thephpleague/omnipay-eway",
+    "homepage": "https://github.com/Mihai-P/tez-omnipay-eway",
     "license": "MIT",
     "authors": [
         {
