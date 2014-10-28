@@ -16,7 +16,7 @@
         {
             "name": "Mihai Petrescu",
             "email": "adrian@adrianmacneil.com"
-        },
+        }
     ],
     "autoload": {
         "psr-4": { "Omnipay\\Eway31\\" : "src/" }
