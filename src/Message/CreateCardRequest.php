@@ -14,7 +14,7 @@ class CreateCardRequest extends AbstractRequest
         $data['Method'] = 'CreateTokenCustomer';
         $data['DeviceID'] = 'https://github.com/adrianmacneil/omnipay';
         $data['RedirectUrl'] = $this->getReturnUrl();
-        $data['TransactionType'] = "Purchase";
+        $data['TransactionType'] = "Recurring";
         $data['Customer'] = array();
         $card = $this->getCard();
         if ($card) {

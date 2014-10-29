@@ -22,16 +22,6 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->setParameter('apiKey', $value);
     }
 
-    public function getTokenCustomerID()
-    {
-        return $this->getParameter('tokenCustomerID');
-    }
-
-    public function setTokenCustomerID($value)
-    {
-        return $this->setParameter('tokenCustomerID', $value);
-    }
-
     public function getPassword()
     {
         return $this->getParameter('password');
