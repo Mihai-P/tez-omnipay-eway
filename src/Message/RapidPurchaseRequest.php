@@ -23,15 +23,16 @@ class RapidPurchaseRequest extends AbstractRequest
         $data['Payment']['InvoiceNumber'] = $this->getTransactionId();
         $data['Payment']['InvoiceDescription'] = $this->getDescription();
         $data['Payment']['CurrencyCode'] = $this->getCurrency();
-
+        /*
         $card = $this->getCard();
         if ($card) {
-            $data['Customer']['FirstName'] = $card->getFirstName();
-            $data['Customer']['LastName'] = $card->getLastName();
+            //$data['Customer']['FirstName'] = $card->getFirstName();
+            //$data['Customer']['LastName'] = $card->getLastName();
             $data['Customer']['CardDetails'] = [
                 "CVN" => $card->getCvv()
             ];
         }
+        */
 
         return $data;
     }
