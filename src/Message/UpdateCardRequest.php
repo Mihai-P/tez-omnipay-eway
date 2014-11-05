@@ -13,15 +13,14 @@ class UpdateCardRequest extends AbstractRequest
         $data['Method'] = 'UpdateTokenCustomer';
         $data['DeviceID'] = 'https://github.com/adrianmacneil/omnipay';
         $data['RedirectUrl'] = $this->getReturnUrl();
-        $data['TransactionType'] = "Purchase";
+        $data['TransactionType'] = "Recurring";
         $data['Customer'] = array();
         $data['Customer']['Title'] = 'Mr.';
-        $data['Customer']['TokenCustomerID'] = $this->getToken();
+        $data['Customer']['TokenCustomerID'] = $this->getCardReference();
         $card = $this->getCard();
         if ($card) {
             $data['Customer']['FirstName'] = $card->getFirstName();
             $data['Customer']['LastName'] = $card->getLastName();
-            $data['Customer']['TokenCustomerID'] = $this->getToken();
             $data['Customer']['CardDetails'] = [
                 "Name" => $card->getFirstName() . ' ' . $card->getLastName(),
                 "Number" => $card->getNumber(),

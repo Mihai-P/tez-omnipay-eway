@@ -14,9 +14,9 @@ class RapidPurchaseRequest extends AbstractRequest
         $data['DeviceID'] = 'https://github.com/adrianmacneil/omnipay';
         $data['TotalAmount'] = 0;
         $data['RedirectUrl'] = $this->getReturnUrl();
-        $data['TransactionType'] = "Purchase";
+        $data['TransactionType'] = "Recurring";
         $data['Customer'] = array();
-        $data['Customer']['TokenCustomerID'] = $this->getToken();
+        $data['Customer']['TokenCustomerID'] = $this->getCardReference();
 
         $data['Payment'] = array();
         $data['Payment']['TotalAmount'] = $this->getAmountInteger();
