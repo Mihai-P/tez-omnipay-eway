@@ -32,15 +32,66 @@ The following gateways are provided by this package:
 For general usage instructions, please see the main [Omnipay](https://github.com/Mihai-P/tez-omnipay-eway)
 repository.
 
-## Support
+## Examples
 
-If you are having general issues with Omnipay, we suggest posting on
-[Stack Overflow](http://stackoverflow.com/). Be sure to add the
-[omnipay tag](http://stackoverflow.com/questions/tagged/omnipay) so it can be easily found.
+```php
+        $gateway = GatewayFactory::create('Eway31_Rapid');
+        $gateway->setTestMode(true);
+        $gateway->setApiKey(\Yii::$app->params['eway']['key']);
+        $gateway->setPassword(\Yii::$app->params['eway']['password']);
+        $card = new CreditCard([
+            'firstName' => 'Bobby',
+            'lastName' => 'Tables',
+            'number' => '4444333322221111',
+            'cvv' => '123',
+            'expiryMonth' => 12,
+            'expiryYear' => '2017',
+            'email' => 'testEway@biti.ro',
+        ]);
+        $response = $gateway->createCard(['card' => $card])->send();
+        if ($response->isSuccessful()) {
+            $tokenCustomerID = $response->getTokenCustomerID();
+            echo "We have a token ID<br>";
+            // payment was successful: update database
+        } elseif ($response->isRedirect()) {
+            // redirect to offsite payment gateway
+            $response->redirect();
+            die('error');
+        } else {
+            // payment failed: display message to customer
+            print_r($response->getCode());
+            print_r($response);
+            die('payment failed');
+        }
 
-If you want to keep up to date with release anouncements, discuss ideas for the project,
-or ask more detailed questions, there is also a [mailing list](https://groups.google.com/forum/#!forum/omnipay) which
-you can subscribe to.
+        if($tokenCustomerID) {
+            $card2 = new CreditCard([
+                'firstName' => 'Mi',
+                'lastName' => 'Pe',
+                'number' => '4444333322221111',
+                'cvv' => '123',
+                'expiryMonth' => 12,
+                'expiryYear' => '2016',
+                'email' => 'testEway@biti.ro',
+            ]);
+            echo "UPDATE<br>";
+            $response = $gateway->updateCard(['cardReference' => $tokenCustomerID, 'card' => $card2])->send();
+            print_r($response->getCode());
 
-If you believe you have found a bug, please report it using the [GitHub issue tracker](https://github.com/Mihai-P/tez-omnipay-eway/issues),
-or better yet, fork the library and submit a pull request.
+            $card3 = new CreditCard([
+                'firstName' => 'Mi',
+                'lastName' => 'Pe',
+                //'cvv' => '123',
+            ]);
+            echo "PURCHASE<br>";
+            $response = $gateway->purchase(['amount' => '10.00', 'cardReference' => $tokenCustomerID, 'transactonId' => 'Invoice1', 'description' => 'Invoice1 billed', 'currency' => 'AUD', 'card' => $card3])->send();
+            //print_r($response);
+            print_r($response->getCode());
+
+            echo "PURCHASE<br>";
+            $response = $gateway->purchase(['amount' => '10.00', 'cardReference' => $tokenCustomerID, 'transactonId' => 'Invoice1', 'description' => 'Invoice1 billed', 'currency' => 'AUD'])->send();
+            //print_r($response);
+            print_r($response->getCode());
+        }
+```
+ 
