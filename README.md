@@ -13,7 +13,7 @@ to your `composer.json` file:
 ```json
 {
     "require": {
-        "tez/omnipay-eway31": "~2.0"
+        "tez/omnipay-eway": "~2.0"
     }
 }
 ```
