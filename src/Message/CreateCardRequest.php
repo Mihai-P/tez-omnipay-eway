@@ -1,9 +1,16 @@
 <?php
+/**
+ * eWAY 3.1 Create Credit Card Request
+ */
 
 namespace Omnipay\Eway31\Message;
 
 /**
- * Stripe Create Credit Card Request
+ * eWAY 3.1 Create Credit Card Request
+ *
+ * Usage is described in \Omnipay\Common\Message\AbstractRequest
+ *
+ * @see \Omnipay\Common\Message\AbstractRequest
  */
 class CreateCardRequest extends AbstractRequest
 {
@@ -12,7 +19,7 @@ class CreateCardRequest extends AbstractRequest
     {
         $data = array();
         $data['Method'] = 'CreateTokenCustomer';
-        $data['DeviceID'] = 'https://github.com/adrianmacneil/omnipay';
+        $data['DeviceID'] = 'https://github.com/Mihai-P/tez-omnipay-eway';
         $data['RedirectUrl'] = $this->getReturnUrl();
         $data['TransactionType'] = "Recurring";
         $data['Customer'] = array();

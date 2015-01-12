@@ -1,9 +1,23 @@
 <?php
+/**
+ * eWAy Rapid 3.1 Gateway
+ */
 
 namespace Omnipay\Eway31;
 
 /**
- * eWAY Rapid 3.0 Gateway
+ * eWay Rapid 3.1 Gateway
+ *
+ * All of the functionality of the Rapid 3.1 gateway is the same as the
+ * functionality of the Rapid 3.0 gateway except for the 3 functions
+ * extended here.
+ *
+ * Usage is described in \Omnipay\Common\AbstractGateway.
+ *
+ * @see \Omnipay\Common\AbstractGateway
+ * @reference http://www.eway.com.au/
+ * @reference http://en.wikipedia.org/wiki/EWay
+ * @reference http://www.eway.com.au/developers/cool-stuff/sandbox-testing for sandbox testing
  */
 class RapidGateway extends \Omnipay\Eway\RapidGateway
 {

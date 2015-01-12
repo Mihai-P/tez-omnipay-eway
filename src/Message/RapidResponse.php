@@ -1,4 +1,7 @@
 <?php
+/**
+ * eWAY Rapid 3.1 Purchase Response
+ */
 
 namespace Omnipay\Eway31\Message;
 
@@ -6,7 +9,7 @@ use \Omnipay\Common\Message\AbstractResponse;
 use \Omnipay\Common\Message\RedirectResponseInterface;
 
 /**
- * eWAY Rapid 3.0 Purchase Response
+ * eWAY Rapid 3.1 Purchase Response
  */
 class RapidResponse extends \Omnipay\Eway\Message\RapidResponse
 {

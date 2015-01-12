@@ -1,9 +1,16 @@
 <?php
+/**
+ * eWAY Rapid 3.1 Purchase Request
+ */
 
 namespace Omnipay\Eway31\Message;
 
 /**
- * eWAY Rapid 3.0 Purchase Request
+ * eWAY Rapid 3.1 Purchase Request
+ *
+ * Usage is described in \Omnipay\Common\Message\AbstractRequest
+ *
+ * @see \Omnipay\Common\Message\AbstractRequest
  */
 class RapidPurchaseRequest extends AbstractRequest
 {
@@ -11,7 +18,7 @@ class RapidPurchaseRequest extends AbstractRequest
     {
         $data = array();
         $data['Method'] = 'ProcessPayment';
-        $data['DeviceID'] = 'https://github.com/adrianmacneil/omnipay';
+        $data['DeviceID'] = 'https://github.com/Mihai-P/tez-omnipay-eway';
         $data['TotalAmount'] = 0;
         $data['RedirectUrl'] = $this->getReturnUrl();
         $data['TransactionType'] = "Recurring";

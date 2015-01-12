@@ -1,9 +1,16 @@
 <?php
+/**
+ * eWAY 3.1 Update Credit Card Request
+ */
 
 namespace Omnipay\Eway31\Message;
 
 /**
- * Stripe Update Credit Card Request
+ * eWAY 3.1 Update Credit Card Request
+ *
+ * Usage is described in \Omnipay\Common\Message\AbstractRequest
+ *
+ * @see \Omnipay\Common\Message\AbstractRequest
  */
 class UpdateCardRequest extends AbstractRequest
 {
@@ -11,7 +18,7 @@ class UpdateCardRequest extends AbstractRequest
     {
         $data = array();
         $data['Method'] = 'UpdateTokenCustomer';
-        $data['DeviceID'] = 'https://github.com/adrianmacneil/omnipay';
+        $data['DeviceID'] = 'https://github.com/Mihai-P/tez-omnipay-eway';
         $data['RedirectUrl'] = $this->getReturnUrl();
         $data['TransactionType'] = "Recurring";
         $data['Customer'] = array();

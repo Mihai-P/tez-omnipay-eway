@@ -1,11 +1,18 @@
 <?php
+/**
+ * eWAY 3.1 Abstract Request
+ */
 
 namespace Omnipay\Eway31\Message;
 
 /**
- * Stripe Abstract Request
+ * eWAY 3.1 Abstract Request
  *
- * @method \Omnipay\Stripe\Message\Response send()
+ * This serves as the base class for the eWay 3.1 requests.
+ *
+ * Usage is described in \Omnipay\Common\Message\AbstractRequest
+ *
+ * @see \Omnipay\Common\Message\AbstractRequest
  */
 abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 {

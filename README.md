@@ -35,10 +35,16 @@ repository.
 ## Examples
 
 ```php
-$gateway = GatewayFactory::create('Eway31_Rapid');
+use Omnipay\Omnipay;
+
+// Create the gateway object and set its parameters
+$gateway = Omnipay::create('Eway31_Rapid');
 $gateway->setTestMode(true);
 $gateway->setApiKey(\Yii::$app->params['eway']['key']);
 $gateway->setPassword(\Yii::$app->params['eway']['password']);
+
+// Create a CreditCard object which we intend to validate
+// via the gateway
 $card = new CreditCard([
     'firstName' => 'Bobby',
     'lastName' => 'Tables',
@@ -48,6 +54,9 @@ $card = new CreditCard([
     'expiryYear' => '2017',
     'email' => 'testEway@biti.ro',
 ]);
+
+// Use the gateway createCard method to determine if creating
+// the card in the eWay gateway is successful.
 $response = $gateway->createCard(['card' => $card])->send();
 if ($response->isSuccessful()) {
     $tokenCustomerID = $response->getTokenCustomerID();
@@ -64,7 +73,10 @@ if ($response->isSuccessful()) {
     die('payment failed');
 }
 
-if($tokenCustomerID) {
+// if we got a tokenCustomerId then we can use it for further transactions.
+if(! empty($tokenCustomerID)) {
+    
+    // Make a second credit card object.
     $card2 = new CreditCard([
         'firstName' => 'Mi',
         'lastName' => 'Pe',
@@ -74,22 +86,28 @@ if($tokenCustomerID) {
         'expiryYear' => '2016',
         'email' => 'testEway@biti.ro',
     ]);
+    
+    // Update the card on the token.
     echo "UPDATE<br>";
     $response = $gateway->updateCard(['cardReference' => $tokenCustomerID, 'card' => $card2])->send();
     print_r($response->getCode());
 
+    // Put through a purchase transaction with the updated card.
+    echo "PURCHASE<br>";
+    $response = $gateway->purchase(['amount' => '10.00', 'cardReference' => $tokenCustomerID, 'transactonId' => 'Invoice1', 'description' => 'Invoice1 billed', 'currency' => 'AUD'])->send();
+    //print_r($response);
+    print_r($response->getCode());
+    
+    // Make a third credit card object.
     $card3 = new CreditCard([
         'firstName' => 'Mi',
         'lastName' => 'Pe',
         //'cvv' => '123',
     ]);
+
+    // Put through a purchase transaction with the third card.
     echo "PURCHASE<br>";
     $response = $gateway->purchase(['amount' => '10.00', 'cardReference' => $tokenCustomerID, 'transactonId' => 'Invoice1', 'description' => 'Invoice1 billed', 'currency' => 'AUD', 'card' => $card3])->send();
-    //print_r($response);
-    print_r($response->getCode());
-
-    echo "PURCHASE<br>";
-    $response = $gateway->purchase(['amount' => '10.00', 'cardReference' => $tokenCustomerID, 'transactonId' => 'Invoice1', 'description' => 'Invoice1 billed', 'currency' => 'AUD'])->send();
     //print_r($response);
     print_r($response->getCode());
 }
