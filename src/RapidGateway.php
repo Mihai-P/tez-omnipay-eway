@@ -27,8 +27,10 @@ class RapidGateway extends \Omnipay\Eway\RapidGateway
     }
 
     /**
+     * Store a credit card in the gateway and return a token.
+     *
      * @param array $parameters
-     * @return \Omnipay\Stripe\Message\CreateCardRequest
+     * @return \Omnipay\Eway31\Message\CreateCardRequest
      */
     public function createCard(array $parameters = array())
     {
@@ -36,8 +38,10 @@ class RapidGateway extends \Omnipay\Eway\RapidGateway
     }
 
     /**
+     * Update a stored credit card in the gateway.
+     *
      * @param array $parameters
-     * @return \Omnipay\Stripe\Message\CreateCardRequest
+     * @return \\Omnipay\Eway31\Message\UpdateCardRequest
      */
     public function updateCard(array $parameters = array())
     {
@@ -45,8 +49,10 @@ class RapidGateway extends \Omnipay\Eway\RapidGateway
     }
 
     /**
+     * Create a purchase request.
+     *
      * @param array $parameters
-     * @return \Omnipay\Stripe\Message\CreateCardRequest
+     * @return \Omnipay\Eway31\Message\RapidPurchaseRequest
      */
     public function purchase(array $parameters = array())
     {
