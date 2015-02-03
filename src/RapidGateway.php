@@ -1,6 +1,6 @@
 <?php
 /**
- * eWAy Rapid 3.1 Gateway
+ * eWay Rapid 3.1 Gateway
  */
 
 namespace Omnipay\Eway31;
