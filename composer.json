@@ -22,8 +22,8 @@
         "psr-4": { "Omnipay\\Eway31\\" : "src/" }
     },
     "require": {
-        "omnipay/common": "~2.0",
-        "omnipay/eway": "~2.0"
+        "omnipay/common": "*",
+        "omnipay/eway": "*"
     },
     "require-dev": {
         "omnipay/tests": "~2.0",
