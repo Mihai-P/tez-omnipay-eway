@@ -189,14 +189,13 @@ class OldGateway extends \Omnipay\Eway\RapidGateway
     {
         $client = $this->getClient();
         $params = $this->generateParams($card, $customerReference);
-
         try {
             $soap_response = $client->CreateCustomer($params);
             $this->response = $soap_response->CreateCustomerResult ?
                 (new SimpleResponse)->setIsSuccessful(true)->setMessage($soap_response->CreateCustomerResult) :
                 (new SimpleResponse)->setIsSuccessful(false)->setMessage('Unknown error happened on update customer payment details');
         } catch (\SoapFault $fault) {
-            $this->response = new SimpleResponse(false, $fault->getMessage());
+            $this->response = (new SimpleResponse)->setIsSuccessful(false)->setMessage($fault->getMessage());
         }
         return $this;
     }
