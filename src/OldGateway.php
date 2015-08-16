@@ -222,7 +222,7 @@ class OldGateway extends \Omnipay\Eway\RapidGateway
             $this->response = strtolower($soap_response->ewayResponse->ewayTrxnStatus) == 'true' ?
                 (new SimpleResponse)->setIsSuccessful(true)->setCode('A2000') :
                 (new SimpleResponse)->setIsSuccessful(false)->setMessage($soap_response->ewayResponse->ewayTrxnError);
-        } catch (SoapFault $fault) {
+        } catch (\SoapFault $fault) {
             $this->response = (new SimpleResponse)->setIsSuccessful(false)->setMessage($fault->getMessage());
         }
 
